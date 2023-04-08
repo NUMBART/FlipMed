@@ -11,9 +11,10 @@ public class PatientService {
 		this.patientRepository = InMemoryPatientRepository.getInstance();
 	}
 
-	public void registerPatient(String patientName) {
+	public Patient registerPatient(String patientName) {
 		Patient patient = new Patient(patientName);
 		patientRepository.save(patient);
 		System.out.println("Registered patient: " + patient.toString());
+		return patient;
 	}
 }

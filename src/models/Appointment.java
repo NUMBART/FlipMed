@@ -3,17 +3,20 @@ package models;
 import java.util.Queue;
 
 public class Appointment {
-	long id;
+	private static Long appointmentsCount = 0L;
+	Long id;
 	Patient patient;
 	Slot slot;
 	Queue<Patient> waitlist;
 
-	public long getId() {
-		return id;
+	public Appointment(Patient patient, Slot slot) {
+		this.patient = patient;
+		this.slot = slot;
+		this.id = appointmentsCount++;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public long getId() {
+		return id;
 	}
 
 	public Patient getPatient() {
@@ -32,11 +35,21 @@ public class Appointment {
 		this.slot = slot;
 	}
 
-	public Queue<Patient> getWaitlist() {
-		return waitlist;
+	public Patient removeFromWaitlist() {
+		return waitlist.poll();
 	}
 
-	public void setWaitlist(Queue<Patient> waitlist) {
-		this.waitlist = waitlist;
+	public void addToWaitlist(Patient patient) {
+		waitlist.add(patient);
+	}
+
+	@Override
+	public String toString() {
+		return "Appointment{" +
+				"id=" + id +
+				", patient=" + patient +
+				", slot=" + slot +
+				", waitlist=" + waitlist +
+				'}';
 	}
 }

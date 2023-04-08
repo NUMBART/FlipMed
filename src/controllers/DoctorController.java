@@ -17,10 +17,11 @@ public class DoctorController {
 		this.slotService = new SlotService();
 	}
 
-	public void registerDoctor(String doctorName, Speciality speciality) {
+	public Doctor registerDoctor(String doctorName, Speciality speciality) {
 		Doctor doctor = new Doctor(doctorName, speciality);
 		doctorService.save(doctor);
 		System.out.println(doctor.toString());
+		return doctor;
 	}
 
 	public void markDoctorAvailable(String doctorName, List<Slot> newSlots) throws Exception {
